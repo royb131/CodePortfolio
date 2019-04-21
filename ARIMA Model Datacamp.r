@@ -12,7 +12,7 @@ plot(djia$Close)
 # Plot the Southern Oscillation Index
 plot(soi)
 
-_________________________________________\\
+#_________________________________________\\
 # astsa and xts are preloaded 
 
 # Plot GNP series (gnp) and its growth rate
@@ -27,7 +27,7 @@ plot(djia$Close)
 plot(diff(djia$Close))
 plot(log(djia$Close))
 
-_________________________________________\\
+#_________________________________________\\
 Simulating ARMA Models
 As we saw in the video, any stationary time series can be written as a linear combination of white noise. In addition, any ARMA model
 has this form, so it is a good choice for modeling stationary time series.
@@ -46,7 +46,7 @@ plot(MA)
 # Generate and plot an AR(2) with parameters 1.5 and -.75
 AR <- arima.sim(model = list(order = c(2, 0, 0), ar = c(1.5,-.75)), n = 200)
 plot(AR)
-_________________________________________\\
+#_________________________________________\\
 
 Throughout this course, you will be using sarima() from the astsa package to easily fit models to data. 
 The command produces a residual diagnostic graphic that can be ignored until diagnostics is discussed later in the chapter.
@@ -65,7 +65,7 @@ use sarima(x, p = 1, d = 0, q = 0) or simply sarima(x, 1, 0, 0).
 
 sarima(x, p = 1, d = 0, q = 0) 
 
-_________________________________________\\
+#_________________________________________\\
 # astsa is preloaded.he package astsa is preloaded. x contains the 200 AR(2) observations.
 x <- arima.sim(model = list(order = c(2, 0, 0), ar = c(1.5, -.75)), n = 200)
 x
@@ -76,14 +76,14 @@ acf2(x)
 
 # Fit an AR(2) to the data and examine the t-table
 sarima(x, p = 2, d = 0, q = 0) 
-_________________________________________\\
+#_________________________________________\\
 Fitting an MA(1) Model
 x <- arima.sim(model = list(order = c(0, 0, 1), ma = -.8), n = 100). Look at the simulated data and the sample ACF and 
 PACF to determine the order based on the table given in the first exercise. Then fit the model.
 
 Recall that for pure MA(q) models, the theoretical ACF will cut off at lag q while the PACF will tail off.
 
-_________________________________________\\
+#_________________________________________\\
 # astsa is preloaded.The package astsa is preloaded. 100 MA(1) observations are available in your workspace as x
 x <- arima.sim(model = list(order = c(0, 0, 1), ma = -.8), n = 100)
 # Plot x
@@ -96,7 +96,7 @@ acf2(x)
 
 sarima(x, p = 0, d = 0, q = 1) 
 
-_________________________________________\\
+#_________________________________________\\
 Fitting an ARMA model
 # astsa is preloaded.The package astsa is preloaded. 250 ARMA(2,1) observations are in x.
 x <- arima.sim(model = list(order = c(2, 0, 1), ar = c(1, -.9), ma = .8), n = 250)
@@ -110,7 +110,7 @@ acf2(x)
 
 sarima(x, p = 2, d = 0, q = 1) 
 
-_________________________________________\\
+#_________________________________________\\
 Model Choice - I
 
 Based on the sample P/ACF pair of the logged and differenced varve data (dl_varve), an MA(1) was indicated. The best approach to fitting ARMA is to start with a low order model, and then try to add a parameter at a time to see if the results change.
@@ -133,7 +133,7 @@ sarima(dl_varve, p = 0, d = 0, q = 2)
 
 sarima(dl_varve, p = 1, d = 0, q = 1)
 
-_________________________________________\\
+#_________________________________________\\
 Residual Analysis - I
 As you saw in the video, an sarima() run includes a residual analysis graphic. Specifically, the output shows (1) the standardized residuals, (2) the sample ACF of the residuals, (3) a normal Q-Q plot, and (4) the p-values corresponding to the Box-Ljung-Pierce Q-statistic.
 
@@ -152,7 +152,7 @@ sarima(dl_varve, p = 0, d = 0, q = 1)
 
 sarima(dl_varve, p = 1, d = 0, q = 1) 
 
-_________________________________________\\
+#_________________________________________\\
 ARMA get in
 By now you have gained considerable experience fitting ARMA models to data, but before you start celebrating, try one more exercise (sort of) on your own.
 The data in oil are crude oil, WTI spot price FOB (in dollars per barrel), weekly data from 2000 to 2008. Use your skills to fit an ARMA model to the returns. The weekly crude oil prices (oil) are plotted for you. Throughout the exercise, work with the returns, which you will calculate.
@@ -170,7 +170,7 @@ acf2(oil_returns)
 # Assuming both P/ACF are tailing, fit a model to oil_returns.From the P/ACF pair, it is apparent that the correlations are small and the returns are nearly noise. But it could be that both the ACF and PACF are tailing off. If this is the case, then an ARMA(1,1) is suggested. Fit this model to the oil returns using sarima(). Does the model fit well? Can you see the outliers in the residual plot?
 
 sarima(oil_returns, p = 1, d = 0, q = 1)
-_________________________________________\\
+#_________________________________________\\
 ARIMA - Plug and Play
 
 # Plot x
@@ -184,7 +184,7 @@ plot(diff(x))
 # Plot the P/ACF pair of the differenced data
 plot(diff(acf2(x)))
 
-_________________________________________\\
+#_________________________________________\\
 Simulated ARIMA
 # Plot sample P/ACF of differenced data and determine model
 
@@ -194,7 +194,7 @@ plot(acf2(diff(x)))
 
 sarima(x, p = 2, d = 1, q = 0) 
 
-_________________________________________\\
+#_________________________________________\\
 Global Warming
 Now that you have some experience fitting an ARIMA model to simulated data, your next task is to apply your skills to some real world data.
 
@@ -210,7 +210,7 @@ sarima(globtemp, p = 1, d = 1, q = 1)
 # Fit an ARIMA(0,1,2) model to globtemp. Which model is better?
 sarima(globtemp, p = 0, d = 1, q = 2)
 
-_________________________________________\\
+#_________________________________________\\
 Diagnostics - Simulated Overfitting
 
 # Plot sample P/ACF pair of the differenced data
@@ -221,7 +221,7 @@ sarima(x, p = 0, d = 1, q = 1)
 # Fit the second model and compare fit.Overfit the model by adding an additional MA parameter. That is, fit an ARIMA(0,1,2) to the data and compare it to the ARIMA(0,1,1) run.
 sarima(x, p = 0, d = 1, q = 2) 
 
-_________________________________________\\
+#_________________________________________\\
 Diagnostics - Global Temperatures
 
 You can now finish your analysis of global temperatures. Recall that you previously fit two models to the data in globtemp, an ARIMA(1,1,1) 
@@ -236,7 +236,7 @@ sarima(globtemp, p = 1, d = 1, q = 1)
 # Which is the better model?
 print("ARIMA(0,1,2)")
 
-_________________________________________\\
+#_________________________________________\\
 Forecasting Simulated ARIMA
 # Plot P/ACF pair of differenced data 
 plot(acf2(diff(x)))
@@ -249,7 +249,7 @@ sarima(x, p = 1, d = 1, q = 0)
 sarima.for(x, n.ahead = 20, p = 1, d = 1, q = 0) 
 lines(y)  
 
-_________________________________________\\
+#_________________________________________\\
 Forecasting Global Temperatures
 
 Here, you will forecast the annual global temperature deviations globtemp to 2050. Recall that in previous exercises, you fit an ARIMA(0,1,2)
@@ -260,7 +260,7 @@ sarima(globtemp, p = 0, d = 1, q = 2)
 # Forecast data 35 years into the future
 #Use sarima.for() to forceast your global temperature data 35 years ahead to 2050 using the ARIMA(0,1,2) fit.
 sarima.for(globtemp, n.ahead = 35, p = 0, d = 1, q = 2) 
-_________________________________________\\
+#_________________________________________\\
 Fit a Pure Seasonal Model
 # Plot sample P/ACF to lag 60 and compare to the true values.Use acf2() to plot the sample ACF and 
 PACF of the generated data to lag 60 and compare to actual values. To estimate to lag 60, set the max.lag argument equal to 60.
@@ -270,7 +270,7 @@ plot(acf2(x, max.lag = 60))
 and q arguments in your sarima() command, specify P, D, Q, and S (note that R is case sensitive).
 sarima(x, p = 0, d = 0, q = 0, P = 1, D = 0, Q = 1, S = 12)
 
-_________________________________________\\
+#_________________________________________\\
 Fit a Mixed Seasonal Model
 
 # Plot sample P/ACF pair to lag 60 and compare to actual
@@ -279,7 +279,7 @@ plot(acf2(x, max.lag = 60))
 # Fit the seasonal model to x
 sarima(x,  p = 0, d = 0, q = 1,P=0,
        D = 0, Q = 1, S = 12  ) 
-_________________________________________\\
+#_________________________________________\\
 # Plot unempplot(un)
 plot(unemp)
 # Difference your data and plot it.Detrend and plot the data. Save this as d_unemp. Notice the seasonal persistence
@@ -298,7 +298,7 @@ acf2(dd_unemp, max.lag = 60)
 sarima(unemp, p = 2, d = 1, q = 0,P=0,
        D = 1, Q = 1, S=12) 
 
-_________________________________________\\
+#_________________________________________\\
 
 # Plot differenced chicken.Plot the differenced (d = 1) data diff(chicken). Note that the trend is removed and note the seasonal behavior.
 plot(diff(chicken))
@@ -313,7 +313,7 @@ sarima(chicken, p = 2, d = 1, q = 0)
 
 sarima(chicken, p = 2, d = 1, q = 0, P = 1, D = 0, Q = 0, S = 12)
 
-_________________________________________\\
+#_________________________________________\\
 # Plot P/ACF to lag 60 of differenced data.astsa birth packags
 d_birth <- diff(birth)
 plot(acf2(d_birth,max.lag=60))
@@ -328,7 +328,7 @@ sarima(birth, p = 0, d = 1, q = 1, P = 0, D = 1, Q = 1, S = 12)
 # Add AR term and conclude.Add an additional AR (nonseasonal, p = 1) parameter to account for additional correlation. Does the model fit well?
 sarima(birth, p = 1, d = 1, q = 1, P = 0, D = 1, Q = 1, S = 12)
 
-_________________________________________\\
+#_________________________________________\\
 # Fit your previous model to unemp and check the diagnostics
 
 sarima(unemp, p = 2, d = 1, q = 0, P = 0, D = 1, Q = 1, S = 12)
@@ -336,7 +336,7 @@ sarima(unemp, p = 2, d = 1, q = 0, P = 0, D = 1, Q = 1, S = 12)
 
 sarima.for(unemp,n.ahead=36,
            2,1,0,0,1,1,12)
-_________________________________________\\
+#_________________________________________\\
 # Fit the chicken model again and check diagnostics
 sarima(chicken, p = 2, d = 1, q = 0, P = 1, D = 0, Q = 0, S = 12)
 
